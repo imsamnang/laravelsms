@@ -1,6 +1,5 @@
 <script type="text/javascript">
 	// =========================================================================//
-	// 
 	$(document).on("change keyup","#amount",function(){
 		var fee = $('#fee').val();
 		var amt = $('#amount').val();
@@ -38,7 +37,6 @@ $(document).on("change keyup","#discount",function(){
 	var dis = 0;
 	dis =((fee * parseFloat($(this).val()))) /100;
 	var amt = fee -dis;
-
 	$('#paid').val(parseFloat(amt))
 	$('#amount').val(parseFloat(amt))
 });
@@ -46,13 +44,15 @@ $(document).on("change keyup","#discount",function(){
 // ====================================================================================//
 // 
 $(document).on("change keyup","#paid",function(){
-	b = $('#amount').val();
+	var b = $('#amount').val();
 	var pay = $('#paid').val();
 
-	if(pay==''){$('#lack').val()};
+	if(pay==''){
+		$('#lack').val();
+	};
 	
 	if(pay!=''){
-		paid = parseFloat($('#paid').val());
+		var paid = parseFloat($('#paid').val());
 	}
 
 	if (pay !='' && b !='')
@@ -65,38 +65,38 @@ $(document).on("change keyup","#paid",function(){
 	{
 		$('#lack').css({'color':'red'})
 	} else{
-		$('#lack').css({'color':'black'})
+		$('#lack').css({'color':'blac	k'})
 	}
 });
 
 // =======================================================================================//
 // 
 $(document).on("change keyup","#pay",function(){
-	 b = $('#b').val()
-	 var pay = $('#pay').val();
+	var b = $('#b').val();
+	var pay = $('#pay').val();
 
-	 if(pay=='')
-	 {
-	 	$('#lack').val(0) 
-	 }
+	if(pay=='')
+	{
+		$('#lack').val(0);
+	}
 
-	 if(pay !='')
-	 {
-	 	paid = parseFloat($('#pay').val());
-	 }
+	if(pay !='')
+	{
+	 var paid = parseFloat($('#pay').val());
+	}
 
-	 if(pay !='' && b !='')
-	 {
+	if(pay !='' && b !='')
+	{
 	 	var lack = parseFloat(b)- parseFloat(paid);
 	 	$('#lack').val(parseFloat(lack));
-	 }
+	}
 
-	 if($('#lack').val()<0)
-	 {
+	if($('#lack').val()<0)
+	{
 	 	$('#lack').css({'color':'red'})
-	 } else{
+	} else {
 	 	$('#lack').css({'color':'black'})
-	 }
+	}
 });
 
 </script>

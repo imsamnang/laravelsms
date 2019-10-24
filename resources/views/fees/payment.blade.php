@@ -39,8 +39,7 @@
 					Time : {{$status->time}} /
 					Batch : {{$status->batch}} /
 					Group : {{$status->group}} 
-				</caption>	
-
+				</caption>
 
 				<thead>
 					<tr>
@@ -54,9 +53,7 @@
 					</tr>
 				</thead>
 
-
 				<tr>
-
 					<td>
 						<select name="academic_id" id="academic_id">
 							<option value="">-----------------</option>
@@ -108,14 +105,12 @@
 				</tr>
 
 
-
 				<thead>
 					<td colspan="2">Description</td>
 					<td colspan="5">Remark</td>
 				</thead>
 
-				<tbody>	
-
+				<tbody>
 					<tr>
 						<td colspan="2">
 							<input type="text" name="description" id="description">
@@ -124,7 +119,6 @@
 							<input type="text" name="remark" id="remark">
 						</td>
 					</tr>
-
 				</tbody>
 
 			</table>
@@ -134,7 +128,7 @@
 				<input type="submit" name="btn-go" id="btn-go" value="Submit" class="btn btn-primary btn-payment">
 				<input type="button" onclick="this.form.reset()" class="btn btn-warning btn-reset pull-right" value="Reset">
 			</div>
-		{{-- ------------------------------------------------------------------      	 --}}
+		{{-- --------------------------------------------------------------------}}
 	</form>
 </div>
 	@include('fees.list.studentfeelist')

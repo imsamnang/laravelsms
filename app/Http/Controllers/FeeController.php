@@ -55,7 +55,6 @@ class FeeController extends Controller
 
    	public function student_status($student_id)
    	{
-      // dump($student_id);
 			$status = Status::latest('statuses.status_id')
 											->join('students','students.student_id','=','statuses.student_id')
 											->join('classes','classes.class_id','=','statuses.class_id')

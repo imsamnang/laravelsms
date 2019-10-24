@@ -5,7 +5,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div class="col-md-3">
-			<form action="{{route('showStudentPayment')}}" class="search-payent" method="GET">
+			<form action="{{route('showStudentPayment')}}	" class="search-payent" method="GET">
 				<input class="form-control eng-name" name="student_id" id="student_id" type="text" placeholder="Student ID">
 			</form>
 		</div>
