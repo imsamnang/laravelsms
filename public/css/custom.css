@@ -1,0 +1,9 @@
+.ui-datepicker-prev span {
+    background-image: url(/img/back.png) !important;
+        background-position: 0px 0px !important;
+}
+
+.ui-datepicker-next span {
+    background-image: url(/img/next.png) !important;
+        background-position: 0px 0px !important;
+}
