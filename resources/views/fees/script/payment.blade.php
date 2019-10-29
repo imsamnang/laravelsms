@@ -16,11 +16,17 @@
 		})
 	})
 // ----------Function to Enable Element------------	
-// function enableFormElement(frmName)
-// {
-// 	$.each($(frmName).find('input','select'), function(i,element){
-// 		$(element).attr('disabled',false);
-// 	})
-// }
+	function enableFormElement(frmName)
+	{
+		$.each($(frmName).find('input','select'), function(i,element){
+			$(element).attr('disabled',false);
+		})
+	}
 
+	$('#btn-paid').on('click',function(e){
+		e.preventDefault();
+		s_fee_id = $(this).data('id-paid');
+		balance = $(this).val();
+		alert(s_fee_id +  balance);
+	});
 </script>

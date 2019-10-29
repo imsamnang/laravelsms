@@ -131,7 +131,9 @@
 		{{-- --------------------------------------------------------------------}}
 	</form>
 </div>
-	@include('fees.list.studentfeelist')
+	@if (count($readStudentFee)!=0)			
+		@include('fees.list.studentfeelist')
+	@endif
 </div>
 @endsection
 
