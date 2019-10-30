@@ -34,6 +34,7 @@
 						<td style="text-align: center;"> {{ $sf->discount }}%</td>
 						<td style="text-align: center;"> 
 							$ {{number_format($readStudentTransact->where('s_fee_id',$sf->s_fee_id)->sum('paid'),2)}}
+							{{-- $ {{$ts->where('s_fee_id',$sf->s_fee_id)->get()}} --}}
 							<input type="hidden" name="b" id="b">
 						</td>
 						<td style="text-align: center;">

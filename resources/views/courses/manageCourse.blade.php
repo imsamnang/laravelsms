@@ -154,7 +154,7 @@
 			</form>
 			{{------------------------------------------------------------------------}}			
 			<div class="panel panel-default">
-				<div class="panel-heading"><h2>ClassInformation</h2></div>
+				<div class="panel-heading"><h2>Class Information</h2></div>
 				<div class="panel-body" id="add-class-info">
 
 				</div>
@@ -174,7 +174,6 @@
 
 @section('script')
 <script>
-	showClassInfo();
 	$(document).ready(function() {
 		$.ajaxSetup({
 			headers: {
@@ -195,40 +194,6 @@
 			changeYear:true,
 			dateFormat: "yy-mm-dd"
 		});
-	// ==============academic_id================//
-	$('#academic_id').on('change',function(e){
-		showClassInfo();
-	})
-
-	// ==============program_id================//
-	$('#program_id').on('change',function(e){
-		showClassInfo();
-	})
-
-	// ==============level_id==================//
-	$('#level_id').on('change',function(e){
-		showClassInfo();
-	})
-
-	//==============shift_id================//
-	$('#shift_id').on('change',function(e){
-		showClassInfo();
-	})
-
-	//============time_id==============//
-	$('#time_id').on('change',function(e){
-		showClassInfo();
-	})
-
-	//=============batch_id===============//
-	$('#batch_id').on('change',function(e){
-		showClassInfo();
-	})
-
-//===========group_id================//
-$('#group_id').on('change',function(e){
-	showClassInfo();
-})
 
 	//==============================//
 	$(document).on('click','#add-more-academic',function(e){
@@ -282,20 +247,18 @@ $('#group_id').on('change',function(e){
   	var program_id = $(this).val();
   	var level =  $('#level_id');
   	$(level).empty();
-  	$.get("{{ route('showlevel')}}",{program_id:program_id}, function(data){
-  		
+  	$.get("{{ route('showlevel')}}",{program_id:program_id}, function(data){  		
   		$.each(data,function(i,l){  
   			$(level).append($("<option/>",{
   				value : l.level_id,
   				text  : l.level
   			}))
   		})
-  		showClassInfo();
   	})
+  	showClassInfo();
   });
-  //
+	
   $('#add-more-level').on('click',function(){
-
   	var programs = $('#program_id option');
   	var program = $('#frm-level-create').find('#program_id');
   	$(program).empty();
@@ -424,15 +387,50 @@ $('#group_id').on('change',function(e){
 		})
 	});
 
+	// ==============program_id================//
+	$('#program_id').on('change',function(e){
+		showClassInfo();
+	})
+
+	// ==============academic_id================//
+	$('#academic_id').on('change',function(e){
+		showClassInfo();
+	})
+
+	// ==============level_id==================//
+	$('#level_id').on('change',function(e){
+		showClassInfo();
+	})
+
+	//==============shift_id================//
+	$('#shift_id').on('change',function(e){
+		showClassInfo();
+	})
+
+	//============time_id==============//
+	$('#time_id').on('change',function(e){
+		showClassInfo();
+	})
+
+	//=============batch_id===============//
+	$('#batch_id').on('change',function(e){
+		showClassInfo();
+	})
+
+	//===========group_id================//
+	$('#group_id').on('change',function(e){
+		showClassInfo();
+	})
+
 	//=================================================//
 	function showClassInfo()
 	{
 		// var academic_id=$('#academic_id').val();
-		var data =  $('#frm-create-class').serialize();
+		var data = $('#frm-create-class').serialize();
 		$.get("{{ route('showClassInformation') }}",data,function(data){
 			$('#add-class-info').empty().append(data);
 			MergeCommonRows($('#table-class-info'));	
-		})
+		});
 	}
 	// ===============================Class Merge Cell Table=============================//
 	function MergeCommonRows(table) {

@@ -29,7 +29,7 @@ class StudentController extends Controller
         $shifts = Shift::all();
         $times = Time::all();
         $batchs = Batch::all();
-        $groups = Group::orderBy('group_id','DESC')->get();
+        $groups = Group::all();
         $student_id = Student::max('student_id');
     	return view('student.studentregistration',compact('programs','academics','levels','shifts','times','batchs','groups','student_id'));
    }

@@ -42,7 +42,7 @@
 		margin-top: 5px;
 	}
 
-	fieldset legend{
+	fieldset legend {
 		display: block;
 		width: 100%;
 		padding:0;
@@ -65,10 +65,11 @@
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
+}
 
 </style>
 
-<!-- ----------------------------------------- -->
+{{-- ------------------------------------------- --}}
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<h3 class="page-header"><i class="fa fa-file-text-o"></i>Student Registration</h3>
@@ -331,7 +332,6 @@
 
 @section('script')
 <script>
-
 //---------------------------------------//
 	$('#dob').datepicker({
 		changeMonth:true,
@@ -346,6 +346,22 @@ $(document).on('click','#class-edit',function(e){
 	$('#choose-academic').modal('hide');
 })
 
+ //========================Add level====================//
+  $('#frm-view-class #program_id').on('change',function(e){
+  	var program_id = $(this).val();
+  	var level =  $('#level_id');
+  	$(level).empty();
+  	$.get("{{ route('showlevel')}}",{program_id:program_id}, function(data){  		
+  		$.each(data,function(i,l){  
+  			$(level).append($("<option/>",{
+  				value : l.level_id,
+  				text  : l.level
+  			}))
+  		})
+  		showClassInfo();
+  	})
+  });
+  //
 // ==========================================//
 	$('#academic_id').on('change',function(e){
 		showClassInfo();
@@ -381,35 +397,18 @@ $(document).on('click','#class-edit',function(e){
 		showClassInfo();
 	})
 
- //========================Add level====================//
-  $('#frm-view-class #program_id').on('change',function(e){
-  	var program_id = $(this).val();
-  	var level =  $('#level_id');
-  	$(level).empty();
-  	$.get("{{ route('showlevel')}}",{program_id:program_id}, function(data){
-  		
-  		$.each(data,function(i,l){  
-  			$(level).append($("<option/>",{
-  				value : l.level_id,
-  				text  : l.level
-  			}))
-  		})
-  		showClassInfo();
-  	})
-  });
-  //
 //=================================================//
 function showClassInfo()
 {
-		// var academic_id=$('#academic_id').val();
-		var data =  $('#frm-view-class').serialize();
-		$.get("{{ route('showClassInformation') }}",data,function(data){
-			$('#add-class-info').empty().append(data);
-			$('td#hidden').addClass('hidden');
-			$('th#hidden').addClass('hidden');
-			MergeCommonRows($('#table-class-info'));	
-		})
-	}
+	// var academic_id=$('#academic_id').val();
+	var data = $('#frm-view-class').serialize();
+	$.get("{{ route('showClassInformation') }}",data,function(data){
+		$('#add-class-info').empty().append(data);
+		$('td#hidden').addClass('hidden');
+		$('th#hidden').addClass('hidden');
+		MergeCommonRows($('#table-class-info'));	
+	})
+}
 
 // =================================================
 	
@@ -419,13 +418,13 @@ function showClassInfo()
 		$('#choose-academic').modal('show');
 	});
 
-		// -------------Browse photo------------------
-		$('#browse_file').on('click',function(e){
-			$('#photo').click();
-		})
-		$('#photo').on('change',function(e){
-			showFile(this,'#showPhoto');
-		})
+	// -------------Browse photo------------------
+	$('#browse_file').on('click',function(e){
+		$('#photo').click();
+	})
+	$('#photo').on('change',function(e){
+		showFile(this,'#showPhoto');
+	})
 
 	// ======================================
 	function showFile(fileInput,img,showName){

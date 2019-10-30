@@ -28,7 +28,8 @@ class CourseController extends Controller
         $shifts = Shift::all();
         $times = Time::all();
         $batchs = Batch::all();
-        $groups = Group::orderBy('group_id','DESC')->get();
+		// $groups = Group::orderBy('group_id','DESC')->get();
+		$groups = Group::all();
     	return view('courses.manageCourse',compact('programs','academics','levels','shifts','times','batchs','groups'));
     }
 
@@ -121,16 +122,26 @@ class CourseController extends Controller
     {
         if ($request->academic_id!="" && $request->program_id=="")
         {
-            $criterial = array('academics.academic_id' => $request->academic_id);
-        }
+          $criterial = array('academics.academic_id' => $request->academic_id);
+				}
+				elseif($request->academic_id!="" && $request->program_id==!"") {
+					$criterial = array('academics.academic_id' => $request->academic_id,
+														'programs.program_id'=> $request->program_id,
+														'levels.level_id' => $request->level_id,
+														'shifts.shift_id' => $request->shift_id,
+														'times.time_id' => $request->time_id,
+														'batchs.batch_id'=> $request->batch_id,
+														'groups.group_id'=> $request->group_id
+												);					
+				}
         elseif ($request->academic_id !="" && 
-								$request->program_id !="" && 
-								$request->level_id !="" &&
-								$request->shift_id !=="" &&
-								$request->time_id =="" &&
-								$request->batch_id =="" &&
-								$request->group_id ==""
-							) 
+                $request->program_id !="" && 
+                $request->level_id !="" &&
+                $request->shift_id !=="" &&
+                $request->time_id !=="" &&
+                $request->batch_id !=="" &&
+                $request->group_id !==""
+            ) 
         {
 					$criterial = array('academics.academic_id' => $request->academic_id,
 														'programs.program_id'=> $request->program_id,

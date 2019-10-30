@@ -75,7 +75,7 @@
 					<td>
 						<div class="input-group">
 						<span class="input-group-addon create-fee" title="Create Fee" style="cursor: pointer;color: blue; padding: 0px 3px; border-right: none;">($)</span>
-						<input type="text" value="{{ $studentfee->amount or null }}" name="fee" id="fee" readonly="true">
+						<input type="text" value="{{ $studentfee->amount or null }}" name="fee" id="Fee" readonly="true">
 						</div>
 
 						<input type="hidden" name="fee_id" id="fee_id" value="{{ $studentfee->fee_id or null}}">
@@ -87,19 +87,19 @@
 					</td>
 
 					<td>
-						<input type="text" name="amount" id="amount">
+						<input type="text" name="amount" id="Amount">
 					</td>
 
 					<td>
-						<input type="text" name="discount" id="discount">
+						<input type="text" name="discount" id="Discount">
 					</td>
 
 					<td>
-						<input type="text" name="paid" id="paid">
+						<input type="text" name="paid" id="Paid">
 					</td>
 
 					<td>
-						<input type="text" name="lack" id="lack" disabled="true">
+						<input type="text" name="lack" id="Lack" disabled="true">
 					</td>					
 
 				</tr>
