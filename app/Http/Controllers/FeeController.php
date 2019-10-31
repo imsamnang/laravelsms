@@ -143,15 +143,59 @@ class FeeController extends Controller
                               'student_id'=>$r->student_id,
                               'transact_id'=>$transact->transact_id]);
         // dump($receiptdetail);
-        return back();
+        return redirect()->route('goPayment',$transact->student_id);
     }
 
     public function createFee(Request $r)
     {
-        if ($r->ajax())
-        {
-          $fee = Fee::create($r->all());
-          return response($fee); 
+      if ($r->ajax())
+      {
+        $fee = Fee::create($r->all());
+        return response($fee); 
+      }
+    }
+
+    public function pay(Request $r)
+    {
+      if($r->ajax()){
+        $studentFee = StudentFee::join('levels','levels.level_id','=','studentfees.level_id')
+                  ->join('programs','programs.program_id','=','levels.program_id')
+                  ->join('fees','fees.fee_id','=','studentfees.fee_id')
+                  ->join('students','students.student_id','=','studentfees.student_id')
+                  ->select('levels.level_id',
+                           'programs.program_id',
+                           'fees.fee_id',
+                           'students.student_id',
+                           'studentfees.s_fee_id',
+                           'fees.amount as school_fee',
+                           'studentfees.amount as student_amount',
+                           'studentfees.discount')
+                  ->where('studentfees.s_fee_id',$r->s_fee_id)
+                  ->first();         
+        return response($studentFee);
+      }
+    }
+
+    public function extraPay(Request $r)
+    {
+        // $transact = Transaction::create(['transact_date'=>$r->transact_date,
+        //                                 'fee_id'=>$r->fee_id,
+        //                                 'user_id'=>$r->user_id,
+        //                                 'student_id'=>$r->student_id,
+        //                                 's_fee_id'=>$r->s_fee_id,
+        //                                 'paid' => $r->paid,
+        //                                 'remark'=>$r->remark,
+        //                                 'description' => $r->description
+        //                                 ]);
+        $transact = Transaction::create($r->all());
+        if(count($transact)!=0){
+          $transact_id = $transact->transact_id;
+          $student_id = $transact->student_id;
+          $receipt_id = Receipt::autoNumber();
+          $receiptdetail = ReceiptDetail::create(['receipt_id' =>$receipt_id,
+                                'student_id'=>$student_id,
+                                'transact_id'=>$transact_id]);
         }
+        return redirect()->route('goPayment',$transact->student_id);
     }
 }

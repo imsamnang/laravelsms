@@ -26,7 +26,7 @@
 	</div>	
 
 
-	<form action="{{route('savePayment')}}" method="POST" id="frmPayment">
+	<form action="{{count($readStudentFee)!=0 ? route('extra_pay') : route('savePayment')}}" method="POST" id="frmPayment">
 		{{csrf_field()}}
 		{{-- --------------Panel Body--------------  --}}
 		<div class="panel-body">
@@ -55,7 +55,7 @@
 
 				<tr>
 					<td>
-						<select name="academic_id" id="academic_id">
+						<select name="academic_id" id="academic_id" class="d">
 							<option value="">-----------------</option>
 							@foreach ($programs as $key => $p)
 							<option value="{{ $p->program_id}}" {{ $p->program_id==$status->program_id ? 'selected' : null}}>{{$p->program}}</option>
@@ -64,7 +64,7 @@
 					</td> 
 
 					<td>
-						<select>
+						<select id="Level_ID" class="d">
 							<option value="">-----------------</option>
 							@foreach ($levels as $key => $l)
 							<option value="{{ $l->level_id}}" {{ $l->level_id==$status->level_id? 'selected' : null}}>{{$l->level}}</option>
@@ -87,11 +87,11 @@
 					</td>
 
 					<td>
-						<input type="text" name="amount" id="Amount">
+						<input type="text" name="amount" id="Amount" class="d">
 					</td>
 
 					<td>
-						<input type="text" name="discount" id="Discount">
+						<input type="text" name="discount" id="Discount" class="d">
 					</td>
 
 					<td>
@@ -125,7 +125,7 @@
 
 		</div>
 			<div class="panel-footer" style="height: 60px;">
-				<input type="submit" name="btn-go" id="btn-go" value="Submit" class="btn btn-primary btn-payment">
+				<input type="submit" name="btn-go" id="btn-go" class="btn btn-primary btn-payment" value="{{count($readStudentFee)!=0 ?'Extra Pay':'Save'}}">
 				<input type="button" onclick="this.form.reset()" class="btn btn-warning btn-reset pull-right" value="Reset">
 			</div>
 		{{-- --------------------------------------------------------------------}}
@@ -133,6 +133,7 @@
 </div>
 	@if (count($readStudentFee)!=0)			
 		@include('fees.list.studentfeelist')
+		<input type="hidden" value="0" id="disabled">
 	@endif
 </div>
 @endsection
