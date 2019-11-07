@@ -222,16 +222,17 @@ class FeeController extends Controller
                                         'transactions.paid',
                                         'users.name',
                                         'receipts.receipt_id',
-                                        'statuses.class_id'
+                                        'statuses.class_id',
+                                        'transactions.s_fee_id'
                                         )
                                 ->where('receipts.receipt_id',$receipt_id)
                                 ->first();
-      $status = Program::join('levels', 'levels.level_id', '=', 'classes.level_id')
-                        ->join('classes', 'classes.class_id', '=', 'statuses.class_id')
+      $status = Program::join('levels', 'levels.program_id', '=', 'levels.program_id')
+                        ->join('classes', 'classes.level_id', '=', 'levels.level_id')
                         ->join('shifts', 'shifts.shift_id', '=', 'classes.shift_id')
                         ->join('times', 'times.time_id', '=', 'classes.time_id')
                         ->join('groups', 'groups.group_id', '=', 'classes.group_id')
-                        ->join('batchs', 'batchs.batch_id', '=', 'classes.batch_id')
+                        ->join('batches', 'batches.batch_id', '=', 'classes.batch_id')
                         ->join('academics', 'academics.academic_id', '=', 'classes.academic_id')
                         ->where('classes.class_id', $invoice->class_id)
                         ->select(DB::raw('CONCAT(programs.program,
@@ -239,14 +240,14 @@ class FeeController extends Controller
                                           "/ Shift-",shifts.shift,
                                           "/ Times-",times.time,
                                           "/ Group-",groups.group,
-                                          "/ Batch-",batchs.batch,
+                                          "/ Batch-",batches.batch,
                                           "/ Academic-",academics.academic,
                                           "/ Start Date-",classes.start_date,
-                                          "/ End Date-",classes.end_date,
+                                          "/ End Date-",classes.end_date
                                           ) As detail'))
                         ->first();
-      dd($status);
-      dd($invoice);                                
-      // return response($invoice);
+      $totalPaid = Transaction::where('s_fee_id',$invoice->s_fee_id)->sum('paid');
+                         
+      return view('invoice.invoice',compact('invoice','status','totalPaid'));
     }
 }
