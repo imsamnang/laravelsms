@@ -1,8 +1,6 @@
-<div class="accordian-body collapse" id="demo{{$key}}">
+<div class="accordian-body collapse" id="detail{{$key}}">
 	<table>
-		
-		<thead>
-			
+		<thead>			
 			<tr>
 				<th style="text-align: center;">N<sup>o</sup></th>	
 				<th>Transaction Date</th>
@@ -12,9 +10,7 @@
 				<th>Description</th>
 				<th style="text-align: center;">Action</th>
 			</tr>
-
 		</thead>
-
 		<tbody>
 
 		@foreach ($readStudentTransact as $key => $st)
@@ -35,7 +31,5 @@
 
 		@endforeach	
 		</tbody>
-
-
 	</table>
 </div>

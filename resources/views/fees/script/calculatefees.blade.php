@@ -70,9 +70,9 @@
 
 // =======================================================================================//
 	// 
-	$(document).on("change keyup","#pay",function(){
+	$(document).on("change keyup","#Pay",function(){
 		var b = $('#b').val();
-		var pay = $('#pay').val();
+		var pay = $('#Pay').val();
 
 		if(pay=='')
 		{
@@ -81,7 +81,7 @@
 
 		if(pay !='')
 		{
-		var paid = parseFloat($('#pay').val());
+		var paid = parseFloat($('#Pay').val());
 		}
 
 		if(pay !='' && b !='')

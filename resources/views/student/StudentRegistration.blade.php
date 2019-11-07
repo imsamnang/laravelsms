@@ -240,7 +240,7 @@
 								<table style="margin: 0 auto;">
 									<thead>
 										<tr class="info">
-											<th class="student-id">{{sprintf('%05d',$student_id)}}</th>
+											<th class="student-id">{{sprintf('%05d',$student_id+1)}}</th>
 										</tr>
 									</thead>
 									<tbody>

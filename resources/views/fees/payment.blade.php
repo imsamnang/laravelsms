@@ -104,7 +104,6 @@
 
 				</tr>
 
-
 				<thead>
 					<td colspan="2">Description</td>
 					<td colspan="5">Remark</td>
