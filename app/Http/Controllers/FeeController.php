@@ -171,7 +171,7 @@ class FeeController extends Controller
                            'studentfees.amount as student_amount',
                            'studentfees.discount')
                   ->where('studentfees.s_fee_id',$r->s_fee_id)
-                  ->first();         
+                  ->first();
         return response($studentFee);
       }
     }
@@ -179,23 +179,71 @@ class FeeController extends Controller
     public function extraPay(Request $r)
     {
         // $transact = Transaction::create(['transact_date'=>$r->transact_date,
-        //                                 'fee_id'=>$r->fee_id,
-        //                                 'user_id'=>$r->user_id,
-        //                                 'student_id'=>$r->student_id,
-        //                                 's_fee_id'=>$r->s_fee_id,
-        //                                 'paid' => $r->paid,
-        //                                 'remark'=>$r->remark,
-        //                                 'description' => $r->description
-        //                                 ]);
+          //                                 'fee_id'=>$r->fee_id,
+          //                                 'user_id'=>$r->user_id,
+          //                                 'student_id'=>$r->student_id,
+          //                                 's_fee_id'=>$r->s_fee_id,
+          //                                 'paid' => $r->paid,
+          //                                 'remark'=>$r->remark,
+          //                                 'description' => $r->description
+          //                                 ]);
         $transact = Transaction::create($r->all());
         if(count($transact)!=0){
           $transact_id = $transact->transact_id;
           $student_id = $transact->student_id;
           $receipt_id = Receipt::autoNumber();
           $receiptdetail = ReceiptDetail::create(['receipt_id' =>$receipt_id,
-                                'student_id'=>$student_id,
-                                'transact_id'=>$transact_id]);
+                                                  'student_id'=>$student_id,
+                                                  'transact_id'=>$transact_id]);
         }
         return redirect()->route('goPayment',$transact->student_id);
+    }
+
+    public function printInvoice($receipt_id)
+    {
+      $invoice = ReceiptDetail::join('receipts','receipts.receipt_id','=','receiptdetails.receipt_id')
+                               ->join('students','students.student_id','=','receiptdetails.student_id')
+                               ->join('transactions','transactions.transact_id','=','receiptdetails.transact_id')
+                               ->join('fees','fees.fee_id','transactions.fee_id')
+                               ->join('levels','levels.level_id','=','fees.level_id')
+                               ->join('programs','programs.program_id','=','levels.program_id')
+                               ->join('users','users.id','transactions.user_id')
+                               ->join('statuses','statuses.student_id','=','students.student_id')
+                               ->select('students.student_id',
+                                        'students.first_name',
+                                        'students.last_name',
+                                        'students.sex',
+                                        'fees.amount as school_fee',
+                                        'fees.fee_id',
+                                        'transactions.transact_date',
+                                        'transactions.paid',
+                                        'users.name',
+                                        'receipts.receipt_id',
+                                        'statuses.class_id'
+                                        )
+                                ->where('receipts.receipt_id',$receipt_id)
+                                ->first();
+      $status = Program::join('levels', 'levels.level_id', '=', 'classes.level_id')
+                        ->join('classes', 'classes.class_id', '=', 'statuses.class_id')
+                        ->join('shifts', 'shifts.shift_id', '=', 'classes.shift_id')
+                        ->join('times', 'times.time_id', '=', 'classes.time_id')
+                        ->join('groups', 'groups.group_id', '=', 'classes.group_id')
+                        ->join('batchs', 'batchs.batch_id', '=', 'classes.batch_id')
+                        ->join('academics', 'academics.academic_id', '=', 'classes.academic_id')
+                        ->where('classes.class_id', $invoice->class_id)
+                        ->select(DB::raw('CONCAT(programs.program,
+                                          "/ Level-",levels.level,
+                                          "/ Shift-",shifts.shift,
+                                          "/ Times-",times.time,
+                                          "/ Group-",groups.group,
+                                          "/ Batch-",batchs.batch,
+                                          "/ Academic-",academics.academic,
+                                          "/ Start Date-",classes.start_date,
+                                          "/ End Date-",classes.end_date,
+                                          ) As detail'))
+                        ->first();
+      dd($status);
+      dd($invoice);                                
+      // return response($invoice);
     }
 }
