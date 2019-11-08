@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+
 <style type="text/css" media="screen">
 	.student-photo{
 		height: 160px;
@@ -53,19 +54,19 @@
 		border-bottom: 1px solid #e5e5e5;
 	}
 
-@media screen and (min-width: 768px) {
-  .mymodal {
-    left: 50%;
-    right: auto;
-    width: 700px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-  .modal-content {
-    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  }
-}
+	@media screen and (min-width: 768px) {
+		.mymodal {
+			left: 50%;
+			right: auto;
+			width: 700px;
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+		.modal-content {
+			-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+		}
+	}
 
 </style>
 

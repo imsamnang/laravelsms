@@ -28,10 +28,10 @@ class StudentController extends Controller
         $levels = Level::all();
         $shifts = Shift::all();
         $times = Time::all();
-        $batchs = Batch::all();
+        $batches = Batch::all();
         $groups = Group::all();
         $student_id = Student::max('student_id');
-    	return view('student.studentregistration',compact('programs','academics','levels','shifts','times','batchs','groups','student_id'));
+    	return view('student.studentregistration',compact('programs','academics','levels','shifts','times','batches','groups','student_id'));
    }
 // ===============================================
 

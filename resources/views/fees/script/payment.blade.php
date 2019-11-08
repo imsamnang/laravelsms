@@ -21,10 +21,12 @@
 	function enableFormElement(frmName)
 	{
 		$.each($(frmName).find('input','select'), function(i,element){
-			$(element).attr('disabled',false);
+			$(element).attr('disabled',false).css({'background':'#fff',
+																							'border':'1px solid #ccc',
+																							'color':'#9e9e9e'});
 		})
 	}
-
+	
 	$('.btn-paid').on('click',function(e){
 		e.preventDefault();
 		s_fee_id = $(this).data('id-paid');
@@ -48,6 +50,21 @@
 		);
 	});
 
+//reset
+$('.btn-reset').on('click',function(e){
+	e.preventDefault();
+	var caption = $(this).val();
+	if(caption == "Reset")
+	{
+		$(this).val('Cancel');
+		$('#btn-go').val('Save');
+		$('#Pay').attr('id','Paid');
+		$('#frmPayment').attr('action',"{{route('savePayment')}}");
+		enableFormElement('#frmPayment');
+		return;	
+	}
+	location.reload();
+});
 // disable input	
 	function disabled_input() {
 		$.each($('body').find('.d'), function (index, item) { 

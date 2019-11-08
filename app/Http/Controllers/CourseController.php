@@ -27,10 +27,10 @@ class CourseController extends Controller
         $levels = Level::all();
         $shifts = Shift::all();
         $times = Time::all();
-        $batchs = Batch::all();
+        $batches = Batch::all();
 		// $groups = Group::orderBy('group_id','DESC')->get();
 		$groups = Group::all();
-    	return view('courses.manageCourse',compact('programs','academics','levels','shifts','times','batchs','groups'));
+    	return view('courses.manageCourse',compact('programs','academics','levels','shifts','times','batches','groups'));
     }
 
     public function postInsertAcademic(Request $request)
@@ -130,7 +130,7 @@ class CourseController extends Controller
 														'levels.level_id' => $request->level_id,
 														'shifts.shift_id' => $request->shift_id,
 														'times.time_id' => $request->time_id,
-														'batchs.batch_id'=> $request->batch_id,
+														'batches.batch_id'=> $request->batch_id,
 														'groups.group_id'=> $request->group_id
 												);					
 				}
@@ -148,7 +148,7 @@ class CourseController extends Controller
 														'levels.level_id' => $request->level_id,
 														'shifts.shift_id' => $request->shift_id,
 														'times.time_id' => $request->time_id,
-														'batchs.batch_id'=> $request->batch_id,
+														'batches.batch_id'=> $request->batch_id,
 														'groups.group_id'=> $request->group_id
 												);
         } 
@@ -192,7 +192,7 @@ class CourseController extends Controller
         //                        'levels.level_id' => $request->level_id,
         //                        'shifts.shift_id' => $request->shift_id,
         //                        'times.time_id' => $request->times_id,
-        //                        'batchs.batch_id' => $request->batch_id);
+        //                        'batches.batch_id' => $request->batch_id);
         // }
         // elseif        
         //         ([$request->academic_id !="" && 
@@ -208,7 +208,7 @@ class CourseController extends Controller
         //                        'levels.level_id' => $request->level_id,
         //                        'shifts.shift_id' => $request->shift_id,
         //                        'times.time_id' => $request->times_id,
-        //                        'batchs.batch_id' => $request->batch_id,
+        //                        'batches.batch_id' => $request->batch_id,
         //                        'groups.group_id' => $request->group_id);
         // }  
         $classes = $this->ClassInformation($criterial)->get();
@@ -222,7 +222,7 @@ class CourseController extends Controller
                             ->join('programs','programs.program_id','=','levels.program_id')
                             ->join('shifts','shifts.shift_id','=','classes.shift_id')
                             ->join('times','times.time_id','=','classes.time_id')
-                            ->join('batchs','batchs.batch_id','=','classes.batch_id')
+                            ->join('batches','batches.batch_id','=','classes.batch_id')
                             ->join('groups','groups.group_id','=','classes.group_id')
                             ->where($criterial)
                             ->orderBy('classes.class_id','DESC');

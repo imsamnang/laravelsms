@@ -100,6 +100,7 @@
   <div class="div-button">
     <button onclick="printContent('divide')">Print</button>
     <div id="divide">
+      <?php for($i=0;$i<2;$i++){ ?>
       <div id="container">
         <div class="lenght-limit">
           <table>
@@ -112,18 +113,101 @@
               <td class="line-top">
                 <b style="font-weight: normal;">បង្កាន់ដៃ</b>
                 <b>RECEIPT</b>
+              </td>
             </tr>
             <tr>
+              <td colspan="2" style="text-align: right;"></td>
+              <td colspan="0" style="text-align: right; padding-left: 80px;">
+              <b>Receipt N<sup>o</sup>:{{sprintf("%05d",$invoice->receipt_id)}}</b>
               </td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td style="padding: 5px 0px;width: 120px;">
+                StudentID : <b>{{sprintf("%05d",$invoice->student_id)}}</b>
+              </td>
+              <td style="padding: 5px 0px;width: 200px;">
+                First name : <b>{{$invoice->first_name}}</b>
+              </td>
+              <td style="padding: 5px 0px;width: 200px;">
+                First name : <b>{{$invoice->last_name}}</b>
+              </td>              
+              <td>Gender :
+                <b>{{$invoice->sex==0?'Male':'Female'}}</b>
+              </td>
+            </tr>
+          </table>
+          <table>
+           <thead>
+             <tr>
+               <th class="th" style="text-align: left">Description</th>
+               <th style="width: 70px" class="th">Fee</th>
+               <th style="width: 70px" class="th">Dis</th>
+               <th style="width: 70px" class="th">Amount</th>
+               <th style="width: 70px" class="th">Pay</th>
+               <th style="width: 70px" class="th">Balance</th>
+             </tr>
+           </thead>
+           <tbody>
+             <td class="line-row" style="text-align: left"> {{$status->detail}}</td>
+             <td class="line-row">${{number_format($invoice->school_fee,2)}}</td>
+             <td class="line-row">{{$studentFee->discount}}%</td>
+              <td class="line-row">${{number_format($studentFee->amount,2)}}</td>
+             <td class="line-row">${{number_format($totalPaid,2)}}</td>
+             <td class="line-row">${{number_format($studentFee->amount-$totalPaid,2)}}</td>
+             {{-- <td class="line-row">${{number_format($studentFee->amount-($totalPaid+(($invoice->school_fee*$invoice->discount)/100)),2)}}</td> --}}
+           </tbody>
+          </table> 
+          <table>
+            <tr>
+              <td class="verify">
+                <b>Note:</b>
+                <p style="display: inline-block">
+                  All payments are not refundable or traferable
+                </p>                
+              </td>
+              <td>
+                <b style="margin-bottom: 5px;">Cashier: {{$invoice->name}}</b>
+                <br><br>
+                Printed: {{date('d-M-Y g:i:s A')}}
+              </td>
+              <td style="vertical-align: top; " >
+                Printed By: {{ Auth::user()->name}}
+              </td>
+            </tr>
+          </table>
+          <br><br><br><br><br><br><br>
+          <table>
+            <tr>
+              <td style="font-size: 11px;text-align: center">
+                #254, Mondol III Village, Slorkram Commune, Siemreap District, Siem Reap Province, Postal Code:17252
+              </td>
+            </tr>
+            <tr>
+              <td style="font-size: 11px; text-align: center">
+                Phone:(855) 23 78 343 143 / 70 393 143/ Email: applephagna@gmail.com
+              </td>
             </tr>
           </table>
         </div>
       </div>
+      @if ($i==0)
+        <br>
+        <hr>
+      @endif
+    <?php } ?>
     </div>
   </div>
+  <script type="text/Javascript">
+    function printContent(el) {
+      var restorepage = document.body.innerHTML;
+      var printContent = document.getElementById(el).innerHTML;
+      document.body.innerHTML = printContent;
+      window.print();
+      document.body.innerHTML = restorepage;
+      window.close();
+    }
+  </script>
 </body>
 </html>

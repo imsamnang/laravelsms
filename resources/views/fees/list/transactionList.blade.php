@@ -1,4 +1,4 @@
-<div class="accordian-body collapse" id="detail{{$key}}">
+<div class="accordian-body collapse {{$key==0 ? 'in':''}}" id="detail{{$key}}">
 	<table>
 		<thead>			
 			<tr>

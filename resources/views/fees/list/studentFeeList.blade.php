@@ -11,6 +11,7 @@
 				<thead>
 					<tr>
 						<th  style="text-align: center;">N<sup>o</sup></th>
+						<th style="text-align: center;">Program</th>
 						<th>Level</th>
 						<th style="text-align: center;">Fee</th>
 						<th style="text-align: center;">Amount</th>
@@ -26,6 +27,7 @@
 					@foreach ($readStudentFee as $key => $sf)
 						<tr data-id="" id="sfeedid">
 							<td style="text-align: center;">{{ $key+1}}</td>
+							<td style="text-align: center;">{{ $sf->program}}</td>
 							<td style="text-align: center;">{{ $sf->level}}</td>
 							<td style="text-align: center;">$ {{ number_format($sf->school_fee,2) }}</td>
 							<td style="text-align: center;">$ {{ number_format($sf->student_amount,2) }}</td>

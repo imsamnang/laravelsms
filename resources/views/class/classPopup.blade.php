@@ -87,7 +87,7 @@
 								<div class="input-group">
 									<select name="batch_id" id="batch_id" class="form-control">
 										{{-- <option value="">Select Batch</option> --}}
-										@foreach ($batchs as $Key=>$b)
+										@foreach ($batches as $Key=>$b)
 											<option value="{{$b->batch_id}}">{{$b->batch}}</option>
 										@endforeach
 									</select>

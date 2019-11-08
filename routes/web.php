@@ -66,6 +66,7 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['Admin']], function (){
 	Route::get('/fee/student/pay',['as'=>'pay','uses'=>'FeeController@pay']);
 	Route::post('/fee/student/extra/pay',['as'=>'extra_pay','uses'=>'FeeController@extraPay']);
 	Route::get('/fee/student/print/invoice/{receipt}', ['as' => 'printInvoice', 'uses' => 'FeeController@printInvoice']);
+	Route::get('/create/student/level',['as'=>'createStudentLevel','uses'=>'FeeController@createStudentLevel']);
 
 
 	//==================================Jquery Ajax===========================================
