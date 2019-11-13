@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Academic;
-use App\Program;
-use App\Level;
-use App\Shift;
+use DB;
 use App\Time;
+use App\User;
 use App\Batch;
 use App\Group;
-use App\MyClass;
-use App\Student;
+use App\Level;
+use App\Shift;
 use App\Status;
-use DB;
+use App\MyClass;
+use App\Program;
+use App\Student;
+use App\Academic;
+use Illuminate\Http\Request;
+use Charts;
 
 class ReportController extends Controller
 {
@@ -98,5 +100,19 @@ class ReportController extends Controller
 				return view('report.studentInfoMultiClass',compact('classes'));
 			}
 		}	
-	}	
+	}
+	
+	public function getNewStudentRegister()
+	{
+		$users = Student::where(DB::raw("(DATE_FORMAT(dateregistered,'%Y'))"),date('Y'))
+					->select('dateregistered as created_at')
+					->get();
+		$chart = Charts::database($users, 'bar', 'highcharts')
+				->title("Monthly new Register Users")
+				->elementLabel("Total Users")
+				->dimensions(1000, 500)
+				->responsive(false)
+				->groupByMonth(date('Y'), true);
+		return view('report.newStudentRegister',compact('chart'));
+	}
 }
