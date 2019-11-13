@@ -104,12 +104,12 @@ class ReportController extends Controller
 	
 	public function getNewStudentRegister()
 	{
-		$users = Student::where(DB::raw("(DATE_FORMAT(dateregistered,'%Y'))"),date('Y'))
+		$students = Student::where(DB::raw("(DATE_FORMAT(dateregistered,'%Y'))"),date('Y'))
 					->select('dateregistered as created_at')
 					->get();
-		$chart = Charts::database($users, 'bar', 'highcharts')
-				->title("Monthly new Register Users")
-				->elementLabel("Total Users")
+		$chart = Charts::database($students, 'bar', 'highcharts')
+				->title("Monthly new Register Students")
+				->elementLabel("Total Students")
 				->dimensions(1000, 500)
 				->responsive(false)
 				->groupByMonth(date('Y'), true);
