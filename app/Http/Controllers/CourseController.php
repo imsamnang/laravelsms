@@ -22,15 +22,15 @@ class CourseController extends Controller
 
     public function getManageCourse()
     {
-        $academics = Academic::orderBy('academic_id','DESC')->get();
-        $programs = Program::all();
-        $levels = Level::all();
-        $shifts = Shift::all();
-        $times = Time::all();
-        $batches = Batch::all();
-		// $groups = Group::orderBy('group_id','DESC')->get();
-		$groups = Group::all();
-    	return view('courses.manageCourse',compact('programs','academics','levels','shifts','times','batches','groups'));
+			$academics = Academic::orderBy('academic_id','DESC')->get();
+			$programs = Program::all();
+			$levels = Level::all();
+			$shifts = Shift::all();
+			$times = Time::all();
+			$batches = Batch::all();
+			$groups = Group::orderBy('group_id','DESC')->get();
+			$groups = Group::all();
+			return view('courses.manageCourse',compact('programs','academics','levels','shifts','times','batches','groups'));
     }
 
     public function postInsertAcademic(Request $request)
@@ -47,7 +47,7 @@ class CourseController extends Controller
             }
     	}
     }
-//======================================================//
+	//======================================================//
     public function postInsertProgram(Request $r)
     {
         if ($r->ajax())
@@ -56,7 +56,7 @@ class CourseController extends Controller
         }
     }
 
-    //======================================================//
+  //======================================================//
     public function postInsertLevel(Request $r)
     {
         if ($r->ajax())
@@ -72,7 +72,7 @@ class CourseController extends Controller
             return response(Level::where('program_id',$r->program_id)->get());
         }
     }
-    //======================================================//
+  //======================================================//
     public function postInsertGroup(Request $r)
     {
         if ($r->ajax())
@@ -81,7 +81,7 @@ class CourseController extends Controller
         }
     }
 
-    //======================================================//
+  //======================================================//
     public function postInsertShift(Request $r)
     {
         if ($r->ajax())
@@ -90,7 +90,7 @@ class CourseController extends Controller
         }
     }
 
-    //======================================================//
+  //======================================================//
     public function postInsertTime(Request $r)
     {
         if ($r->ajax())
@@ -99,7 +99,7 @@ class CourseController extends Controller
         }
     }
 
-    //======================================================//
+  //======================================================//
     public function postInsertBatch(Request $r)
     {
         if ($r->ajax())
@@ -108,13 +108,13 @@ class CourseController extends Controller
         }
     }
 
-    //======================================================//
+  //======================================================//
     public function postInsertClass(Request $r)
     {
-        if ($r->ajax())
-        {
-            return response(MyClass::create($r->all()));
-        }
+			if ($r->ajax())
+			{
+				return response(MyClass::create($r->all()));
+			}
     }
 
     //=======================================================//
@@ -228,7 +228,7 @@ class CourseController extends Controller
                             ->orderBy('classes.class_id','DESC');
     }
 
-// ===================delete class======================//
+	// ===================delete class======================//
     public function deleteClass(Request $r)
     {
         if ( $r->ajax())
@@ -236,7 +236,7 @@ class CourseController extends Controller
             MyClass:: destroy($r->class_id);
         }
     }
-// =================Edit Class=====================//
+	// =================Edit Class=====================//
     public function editClass(Request $r)
     {
         if ($r->ajax())

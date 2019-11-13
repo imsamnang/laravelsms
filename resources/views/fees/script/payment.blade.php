@@ -26,7 +26,7 @@
 																							'color':'#9e9e9e'});
 		})
 	}
-	
+//extra paid
 	$('.btn-paid').on('click',function(e){
 		e.preventDefault();
 		s_fee_id = $(this).data('id-paid');
@@ -34,37 +34,61 @@
 		$.get("{{route('pay')}}", {s_fee_id:s_fee_id},
 			function (data) {
 				$('#Paid').attr('id','Pay');
-				$('#s_fee_id').val(data.s_fee_id);
-				$('#program_id').val(data.program_id);
-				$('#Level_ID').val(data.level_id);
-				$('#level_id').val(data.level_id);
+				$('#SFeeID').val(data.s_fee_id);
+				$('#LevelID').val(data.level_id);
 				$('#Fee').val(data.school_fee);
-				$('#fee_id').val(data.fee_id);
+				$('#FeeID').val(data.fee_id);
 				$('#Amount').val(data.student_amount);
 				$('#Discount').val(data.discount);
 				$('#Pay').val(balance);
 				$('#Pay').focus();
 				$('#Pay').select();
 				$('#b').val(balance);
-			},
+				addItem(data);
+				showStudentLevel();
+			}
 		);
 	});
 
-//reset
-$('.btn-reset').on('click',function(e){
-	e.preventDefault();
-	var caption = $(this).val();
-	if(caption == "Reset")
-	{
-		$(this).val('Cancel');
-		$('#btn-go').val('Save');
-		$('#Pay').attr('id','Paid');
-		$('#frmPayment').attr('action',"{{route('savePayment')}}");
-		enableFormElement('#frmPayment');
-		return;	
+// addItem
+function addItem(data) {
+	$('#Program_ID').empty().append($("<option/>",{
+		value	:	data.program_id,
+		text	:	data.program
+	}))
+	$('#Level_ID').empty().append($("<option/>",{
+		value:data.level_id,
+		text:data.level
+	}))
+}
+
+// show student level
+	function showStudentLevel() {
+		level_id = $('#LevelID').val();
+		student_id = $('#student_id').val();
+			$.get("{{ route('showLevelStudent') }}", {level_id:level_id, student_id:student_id},
+				function (data) {
+					// console.log(data)
+					$('#ShowStudentLevel').text(data.detail)
+				}
+			);
 	}
-	location.reload();
-});
+//reset
+	$('.btn-reset').on('click',function(e){
+		e.preventDefault();
+		var caption = $(this).val();
+		if(caption == "Reset")
+		{
+			$(this).val('Cancel');
+			$('#btn-go').val('Save');
+			$('#Pay').attr('id','Paid');
+			$('#frmPayment').attr('action',"{{route('savePayment')}}");
+			enableFormElement('#frmPayment');
+			return;	
+		}
+		location.reload();
+	});
+
 // disable input	
 	function disabled_input() {
 		$.each($('body').find('.d'), function (index, item) { 

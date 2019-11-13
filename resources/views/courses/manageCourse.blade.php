@@ -101,7 +101,7 @@
 						<div class="input-group">
 							<select name="batch_id" id="batch_id" class="form-control">
 								{{-- <option value="">Select Batch</option> --}}
-								@foreach ($batchs as $key =>$b)
+								@foreach ($batches as $key =>$b)
 								<option value="{{$b->batch_id}}">{{$b->batch}}</option>
 								@endforeach
 							</select>
@@ -351,7 +351,6 @@
 		$.post(url,data,function(data){
 			showClassInfo();
 		})
-
 		$(this).trigger('reset');
 	})
 

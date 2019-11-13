@@ -9,7 +9,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="{{asset('img/favicon.png')}}">
 
-  <title>Dashboard</title>
+  <title>@yield('pagetitle','Dashboard')</title>
 
   <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('css/bootstrap-theme.css')}}" rel="stylesheet">
@@ -29,11 +29,16 @@
   <link href="{{asset('css/custom.css')}}" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     {{-- <link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet"> --}}
+  {{-- datatable css --}}
+  <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
   @yield('style')
 </head>
 
 <body>
+
   <section id="container" class="">
+
     @include('layouts.header.header')
     @include('layouts.sidebar.sidebar')
     <section id="main-content">
@@ -43,8 +48,6 @@
     </section>
 
   </section>
-
-
 
 
   <!-- javascripts -->
@@ -71,7 +74,7 @@
   <script src="{{asset('js/easy-pie-chart.js')}}"></script>
   <script src="{{asset('js/jquery-jvectormap-1.2.2.min.js')}}"></script>
   <script src="{{asset('js/jquery-jvectormap-world-mill-en.js')}}"></script>
-  <script src="{{asset('js/xcharts.min.js')}}"></script>
+  {{-- <script src="{{asset('js/xcharts.min.js')}}"></script> --}}
   <script src="{{asset('js/jquery.autosize.min.js')}}"></script>
   <script src="{{asset('js/jquery.placeholder.min.js')}}"></script>
   <script src="{{asset('js/gdp-data.js')}}"></script>  
@@ -79,6 +82,13 @@
   <script src="{{asset('js/sparklines.js')}}"></script>  
   <script src="{{asset('js/charts.js')}}"></script>
   <script src="{{asset('js/jquery.slimscroll.min.js')}}"></script>
+  {{-- datable js --}}
+  <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>  
+  <script src="{{asset('js/dataTables.buttons.min.js')}}"></script>  
+  <script src="{{asset('js/jszip.min.js')}}"></script>  
+  <script src="{{asset('js/pdfmake.min.js')}}"></script>  
+  <script src="{{asset('js/vfs_fonts.js')}}"></script>  
+  <script src="{{asset('js/buttons.html5.min.js')}}"></script>  
   @yield('script')
   <script>
 
@@ -125,7 +135,6 @@
           }
         });
       });
-
 
 </script>
   </body>

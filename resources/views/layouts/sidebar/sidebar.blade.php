@@ -43,6 +43,19 @@
         </a>
         <ul class="sub">
           <li><a class="" href="{{route('getPayment')}}">Student Payment</a></li>
+          <li><a class="" href="{{route('getPayment')}}">Fee Report</a></li>
+        </ul>
+      </li>
+
+      <li class="sub-menu">
+        <a href="javascript:;" class="">
+          <i class="icon_table"></i>
+          <span>Report</span>
+          <span class="menu-arrow arrow_carrot-right"></span>
+        </a>
+        <ul class="sub">
+          <li><a class="" href="{{ route('getStudentList') }}">Student Report</a></li>
+          <li><a class="" href="{{ route('getStudentListMultiClass') }}">Muti Class Student Report</a></li>
         </ul>
       </li>
 

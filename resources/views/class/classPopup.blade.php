@@ -6,8 +6,7 @@
 				</header>
 
 				<form class="form-horizontal" action="#" method="POST" id="frm-view-class">
-				{!! csrf_field() !!}
-
+					{!! csrf_field() !!}
 					<div class="panel panel-body" style="border-bottom: 1px solid #ccc;">					
 						<div class="form-group">
 
@@ -24,7 +23,7 @@
 									</div>
 								</div>
 							</div>				
-{{--------------------------------------------------------------------------------}}							
+							{{-----------------------------------------------}}							
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<label for="program">Course</label>
 								<div class="input-group">
@@ -39,7 +38,7 @@
 									</div>
 								</div>
 							</div>
-{{--------------------------------------------------------------------------------}}	
+							{{-----------------------------------------------}}	
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<label for="level">Level</label>
 								<div class="input-group">
@@ -51,7 +50,7 @@
 									</div>
 								</div>
 							</div>
-{{--------------------------------------------------------------------------------}}	
+							{{-----------------------------------------------}}	
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 								<label for="shift">Shift</label>
 								<div class="input-group">
@@ -66,7 +65,7 @@
 									</div>
 								</div>
 							</div>
-{{--------------------------------------------------------------------------------}}	
+							{{-----------------------------------------------}}	
 							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 								<label for="time">Time</label>
 								<div class="input-group">
@@ -81,7 +80,7 @@
 									</div>
 								</div>
 							</div>
-{{--------------------------------------------------------------------------------}}	
+							{{-----------------------------------------------}}	
 							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 								<label for="batch">batch</label>
 								<div class="input-group">
@@ -96,7 +95,7 @@
 									</div>
 								</div>
 							</div>
-{{--------------------------------------------------------------------------------}}
+							{{-----------------------------------------------}}
 							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 								<label for="group">Group</label>
 								<div class="input-group">
@@ -116,14 +115,19 @@
  					</div>
 
 				</form>
-{{-- --------------------------------------------------------------------	 --}}		
+				{{-- ----------------------------------------------}}		
+				<form action="#" method="get" id="frm-multi-class">
  					<div class="panel panel-default">
-						<div class="panel-heading"><h2>Class Information</h2></div>
+						<div class="panel-heading">
+							<h2>Class Information</h2>
+							<button type="button" id="btn-go" class="btn btn-info btn-xs pull-right" style="margin-top: 5px;">Go</button>
+						</div>
 						<div class="panel-body" id="add-class-info">
 
 						</div>
-					</div > 
-{{-- -------------------------------------------------------------------- --}}
+					</div > 					
+				</form>
+				{{---------------------------------------------------}}
 			</section> 
 
 	</div>

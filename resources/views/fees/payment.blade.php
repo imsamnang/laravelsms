@@ -25,14 +25,13 @@
 		</div>	
 	</div>	
 
-
 	<form action="{{count($readStudentFee)!=0 ? route('extra_pay') : route('savePayment')}}" method="POST" id="frmPayment">
 		{{csrf_field()}}
 		{{-- --------------Panel Body--------------  --}}
 		<div class="panel-body">
 
 			<table style="margin-top: -12px;">
-				<caption class="academicDetail">
+				<caption class="academicDetail" id="ShowStudentLevel">
 					Program : {{$status->program}} /
 					Level : {{$status->level}} /
 					Shift : {{$status->shift}} /
@@ -55,7 +54,7 @@
 
 				<tr>
 					<td>
-						<select name="academic_id" id="academic_id" class="d">
+						<select name="program_id" id="Program_ID" class="d">
 							<option value="">-----------------</option>
 							@foreach ($programs as $key => $p)
 							<option value="{{ $p->program_id}}" {{ $p->program_id==$status->program_id ? 'selected' : null}}>{{$p->program}}</option>
@@ -78,12 +77,12 @@
 						<input type="text" value="{{ $studentfee->amount or null }}" name="fee" id="Fee" readonly="true">
 						</div>
 
-						<input type="hidden" name="fee_id" id="fee_id" value="{{ $studentfee->fee_id or null}}">
-						<input type="hidden" name="student_id" id="student_id" value="{{$student_id}}">
-						<input type="hidden" name="level_id" id="level_id" value="{{ $status->level_id}}">
-						<input type="hidden" name="user_id" id="user_id" value="{{ Auth::id() }}">
-						<input type="hidden" name="transact_date" id="transact_date" value="{{date('Y-m-d H:i:s')}}" >
-						<input type="hidden" name="s_fee_id" id="s_fee_id" value="{{ $studentfee->s_fee_id or null}}">
+						<input type="hidden" name="fee_id" id="FeeID" value="{{ $studentfee->fee_id or null}}">
+						<input type="hidden" name="student_id" id="StudentID" value="{{$student_id}}">
+						<input type="hidden" name="level_id" id="LevelID" value="{{ $status->level_id}}">
+						<input type="hidden" name="user_id" id="UserID" value="{{ Auth::id() }}">
+						<input type="hidden" name="transact_date" id="TransactDate" value="{{date('Y-m-d H:i:s')}}" >
+						<input type="hidden" name="s_fee_id" id="SFeeID" value="{{ $studentfee->s_fee_id or null}}">
 					</td>
 
 					<td>
@@ -124,7 +123,8 @@
 
 		</div>
 			<div class="panel-footer" style="height: 60px;">
-				<input type="submit" name="btn-go" id="btn-go" class="btn btn-primary btn-payment" value="{{count($readStudentFee)!=0 ?'Extra Pay':'Save'}}">
+				<input type="submit" name="btn-go" id="btn-go" class="btn btn-primary btn-payment" 
+							 value="{{count($readStudentFee)!=0 ?'Extra Pay':'Save'}}">
 				@if (count($readStudentFee)!=0)
 					<a href="{{route('printInvoice',$receipt_id)}}" class="btn btn-primary brn-sm" target="_blank"><i class="fa fa-print"></i></a>
 				@endif
